@@ -1,0 +1,56 @@
+<p-card class="w-full shadow-lg border-none rounded-lg bg-white">
+    <ng-template pTemplate="header">
+        <h3 class="text-xl font-semibold text-gray-800 p-4">Crear Tipo de Usuario</h3>
+    </ng-template>
+  
+    <div class="p-4">
+        <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()" class="p-fluid">
+            <div class="grid mb-4">
+                <div class="col-12">
+                    <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">
+                            <i class="pi pi-user"></i>
+                        </span>
+                        <input 
+                            type="text" 
+                            pInputText 
+                            formControlName="name" 
+                            placeholder="Nombre del Tipo" 
+                            title="Nombre del Tipo"
+                            class="w-full p-inputtext-lg border-2 rounded-md focus:border-blue-500 focus:ring-0 transition duration-200 ease-in-out p-2"
+                        />
+                    </div>
+                </div>
+            </div>
+  
+            <div class="flex justify-content-center flex-wrap">
+                <button 
+                    pButton 
+                    pRipple
+                    label="Guardar"
+                    icon="pi pi-save"
+                    severity="info"
+                    class="mr-2 p-button-raised transition-transform duration-200 ease-in-out hover:scale-105 w-full md:w-auto"
+                    type="submit"
+                ></button>
+  
+                <button 
+                    pButton 
+                    pRipple
+                    label="Cancelar"
+                    icon="pi pi-times-circle"
+                    severity="warning"
+                    class="p-button-outlined transition-transform duration-200 ease-in-out hover:scale-105 w-full md:w-auto"
+                    type="button"
+                    (click)="cancel()"
+                ></button>
+            </div>
+        </form>
+    </div>
+  
+    <ng-template pTemplate="footer">
+        <div class="p-4 text-center text-gray-500 text-sm">
+            * Complete el formulario para crear un nuevo tipo de usuario.
+        </div>
+    </ng-template>
+  </p-card>

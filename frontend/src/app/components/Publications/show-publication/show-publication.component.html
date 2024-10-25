@@ -1,0 +1,98 @@
+<p-card class="w-full h-full">
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-between flex-wrap align-items-center">
+      <h3 class="ml-4 text-xl font-semibold text-gray-800">
+        Registro de Publicaciones
+      </h3>
+      <div class="mt-2 mr-2">
+        <a 
+          pButton 
+          pRipple
+          label="Crear Publicación" 
+          icon="pi pi-plus"
+          class="p-button-raised p-button-rounded p-button-info"
+          [routerLink]="['/publications/new']">
+        </a>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="p-4">
+    <p-table [value]="publications" responsiveLayout="scroll" [style]="{'font-size': '0.875rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th class="text-lg">Título</th>
+          <th class="text-lg">Resumen</th>
+          <th class="text-lg">Fecha de Publicación</th>
+          <th class="text-lg">Grupo de Investigación</th>
+          <th class="text-lg">Usuario</th>
+          <th class="text-lg">Archivo</th>
+          <th class="text-lg text-center">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-publication>
+        <tr>
+          <td class="text-md text-gray-700 font-semibold">{{ publication.titulo }}</td>
+          <td class="text-md text-gray-700 font-semibold">{{ publication.resumen }}</td>
+          <td class="text-md text-gray-700 font-semibold">{{ publication.fecha_publicacion | date: 'shortDate' }}</td>
+          <td class="text-md text-gray-700 font-semibold">
+            <span *ngIf="publication.grupo_investigacion_info">
+              {{ publication.grupo_investigacion_info.nombre_grupo }}
+            </span>
+          </td>
+          <td class="text-md text-gray-700 font-semibold">
+            <span *ngIf="publication.usuario_info">
+              {{ publication.usuario_info.name }} {{ publication.usuario_info.lastName }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button 
+              pButton 
+              pRipple
+              icon="pi pi-download"
+              class="p-button-rounded p-button-outlined p-button-info"
+              pTooltip="Abrir archivo PDF"
+              tooltipPosition="top"
+              *ngIf="publication.archivo_pdf"
+              (click)="openPdf(publication.archivo_pdf)">
+            </button>
+          </td>
+          <td class="text-center">
+            <!-- Botón para imprimir -->
+            <button 
+              pButton 
+              pRipple
+              icon="pi pi-print"
+              class="p-button-rounded p-button-outlined p-button-success mr-2"
+              pTooltip="Imprimir"
+              tooltipPosition="top">
+            </button>
+
+            <!-- Botón para editar -->
+            <a 
+              pButton 
+              pRipple
+              icon="pi pi-sync"
+              class="p-button-rounded p-button-outlined p-button-warning mr-2"
+              pTooltip="Editar"
+              tooltipPosition="top"
+              [routerLink]="['/publications/edit', publication.id]">
+            </a>
+
+            <!-- Botón para eliminar -->
+            <button 
+              pButton 
+              pRipple
+              icon="pi pi-trash"
+              class="p-button-rounded p-button-outlined p-button-danger"
+              pTooltip="Eliminar"
+              tooltipPosition="top"
+              (click)="deletePublication(publication.id)">
+            </button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>

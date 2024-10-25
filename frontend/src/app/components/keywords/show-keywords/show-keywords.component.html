@@ -1,0 +1,72 @@
+<p-card class="w-12 h-full">
+    <ng-template pTemplate="header">
+        <div class="flex justify-content-between flex-wrap align-items-center">
+            <h3 class="ml-4 text-xl font-semibold text-gray-800">
+                Registro de Palabras Clave
+            </h3>
+            <div class="mt-2 mr-2">
+                <button 
+                  pButton 
+                  pRipple
+                  label="Crear Palabra Clave" 
+                  icon="pi pi-plus"
+                  class="p-button-raised p-button-rounded p-button-info"
+                  [routerLink]="['/keywords/new']">
+                </button>
+            </div>
+        </div>
+    </ng-template>
+
+    <div class="p-4">
+        <p-table [value]="keywords" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th class="text-lg">Nombre</th>
+                    <th class="text-lg text-center">Acciones</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-keyword>
+                <tr>
+                    <!-- Estilos modernos para el nombre -->
+                    <td class="text-md text-gray-700 font-bold transition-all duration-300 ease-in-out hover:text-cyan-600 hover:font-semibold hover:scale-105 hover:shadow-lg">
+                        {{ keyword.palabra }}
+                    </td>
+                    <td class="text-center">
+                        <!-- Botón para imprimir -->
+                        <button 
+                            pButton 
+                            pRipple
+                            icon="pi pi-print"
+                            class="p-button-rounded p-button-outlined p-button-success mr-2"
+                            pTooltip="Imprimir"
+                            tooltipPosition="top">
+                        </button>
+
+                        <!-- Botón para editar -->
+                        <a 
+                            pButton 
+                            pRipple
+                            icon="pi pi-sync"
+                            class="p-button-rounded p-button-outlined p-button-warning mr-2"
+                            pTooltip="Editar"
+                            tooltipPosition="top"
+                            [routerLink]="['/keywords/edit', keyword.id]">
+                        </a>
+
+                        <!-- Botón para eliminar -->
+                        <button 
+                            pButton 
+                            pRipple
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-outlined p-button-danger"
+                            pTooltip="Eliminar"
+                            tooltipPosition="top"
+                            (click)="delete(keyword.id)">
+                        </button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</p-card>

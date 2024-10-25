@@ -1,0 +1,57 @@
+main {
+    display: grid;
+    gap: 0;
+    grid-template-rows: auto 1fr auto;
+    
+    height: 100vh;
+  }
+  main.aside-visible {
+    grid-template-columns: 270px 1fr; /* El aside tiene un ancho fijo */
+    grid-template-areas:
+        "aside header"
+        "aside section"
+        "aside footer";
+  }
+  
+  /* Estilo para cuando el aside está oculto */
+  main.aside-hidden {
+    grid-template-columns: 1fr; /* El aside ocupa 0 de ancho */
+    grid-template-areas:
+        "header"
+        "section"
+        "footer";
+  }
+  
+  aside {
+    grid-area: aside;
+    transition: opacity 0.3s ease; /* Suavizar la transición de opacidad */
+  }
+  
+  aside.hidden {
+    display: none; /* Ocultar el aside completamente */
+  }
+ 
+  section {
+    grid-area: section;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+  footer {
+    background-color: #007bff; /* Color de fondo */
+    color: #fff; /* Color del texto */
+    
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.text-xs {
+    margin: 0; /* Elimina el margen para un mejor alineamiento */
+    font-size: 0.875rem; /* Tamaño de fuente ajustado */
+}
+
+@media (max-width: 768px) {
+    .footer {
+        text-align: center; /* Alineación centrada en pantallas pequeñas */
+    }
+}
